@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h1>Mobil</h1>
+<form onsubmit="event.preventDefault(); simpanStatus(this)">
+	<div>
+		<input name="Merk" placeholder="Merk">
+	</div>
+
+	<div>
+		<input name="Tipe" placeholder="Tipe">
+	</div>
+
+	<div>
+		<input name="Warna" placeholder="Warna">
+	</div>
+
+	<div>
+		<input name="KapasitasSilinder" placeholder="Kapasitas Silinder">
+	</div>
+
+	<button>Simpan</button>
+</form>
+	<h1 id="well"></h1>
+	<div id="konten 1"></div>
+	<div id="konten 2"></div>
+	<div id="konten 3"></div>
+	<div id="konten 4"></div>
+	
+
+<script type="text/javascript">
+	function simpanStatus(element) {
+
+		const merk = element.Merk.value;
+		const tipe = element.Tipe.value;
+		const warna = element.Warna.value;
+		const kapasitasSilinder = element.KapasitasSilinder.value;
+
+		document.getElementById('well').innerHTML = 'Mobil';
+		document.getElementById('konten 1').innerHTML = `Merk: ${merk}`;
+		document.getElementById('konten 2').innerHTML = `Tipe: ${tipe}`;
+		document.getElementById('konten 3').innerHTML = `Warna: ${warna}`;
+		document.getElementById('konten 4').innerHTML = `Kapasitas Silinder: ${kapasitasSilinder}`;
+
+		return false;
+	}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<! DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="widht=device-widht,initial-scale=1">
+	<title>EVLUASI 1 DOM HTML</title>
+<head>
+<body>
+	<h1>My Biodata</h1>
+	<table>
+		<tr>
+			<td>Nama</td>
+			<td>:</td>
+			<td id="nama"></td>
+		</tr>
+		<tr>
+			<td>Hobi</td>
+			<td>:</td>
+			<td id="hobi"></td>
+		</tr>
+		<tr>
+			<td>Alamat</td>
+			<td>:</td>
+			<td id="alamat"></td>
+		</tr>
+	</table>
+	<script type="text/javascript"> 
+	document.getElementsByTagName('h1')[0].innerHTML = 'Biodata saya';
+
+	const elemenNama = document.getElementById('nama');
+	console.log(elemenNama.innerHTML);
+	elemenNama.innerHTML += 'Vienantha';
+
+
+	document.getElementsByTagName('h1')[0].innerHTML = 'Biodata saya';
+
+	const elemenHobi = document.getElementById('hobi');
+	console.log(elemenHobi.innerHTML);
+	elemenHobi.innerHTML += 'Main bola/putsal';
+
+
+	document.getElementsByTagName('h1')[0].innerHTML = 'Biodata saya';
+
+	const elemenAlamat = document.getElementById('alamat');
+	console.log(elemenAlamat.innerHTML);
+	elemenAlamat.innerHTML += 'Ciranjang';
+	</script>
+</body>
+</html>
