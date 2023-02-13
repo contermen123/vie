@@ -4,7 +4,7 @@ function simpanProduk(form) {
     aplikasiDaftarProduk.menampilkanDaftarProduk();
 }
 const aplikasiDaftarProduk = {
-    produk: {
+    produk: 
         index: -1,
         produk: null,
         harga: null,
@@ -86,7 +86,6 @@ const aplikasiDaftarProduk = {
 
         document.getElementById('btn-save-produk').innerHTML = 'Edit';
     }
-}
 
 function copy(obj) {
     return JSON.parse(JSON.stringify(obj));

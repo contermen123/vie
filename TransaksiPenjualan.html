@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaksi Penjualan</title>
+</head>
+<body>
+    <h4>Transaksi Penjualan</h4>
+    
+        <form id="form-transaksi" action="" onsubmit="event.preventDefault(); simpanTransaksi(this)">
+            <input name="index" type="hidden" value="-1">
+
+        <div>
+            <label for="produk">Produk</label>
+        </div>
+        <div>
+            <input type="text" id="produk" name="produk">
+        </div>
+
+        <div>
+            <label for="harga">Harga Produk</label>
+        </div>
+        <div>
+            <input type="text" id="harga" name="harga">
+        </div>
+
+        <div>
+            <label for="stok">Stok Produk</label>
+        </div>
+        <div>
+            <input type="text" id="stok" name="stok">
+        </div>
+
+        <div>
+            <label for="gambar">Link</label>
+        </div>
+        <div>
+            <input type="text" id="gambar" name="gambar">
+        </div>
+        <div>
+            <label for="jumlah">Jumlah</label>
+        </div>
+        <div>
+            <input type="text" id="jumlah" name="jumlah">
+        </div>
+
+        <div>
+            <label for="total">Total Harga</label>
+        </div>
+        <div>
+            <input type="text" id="total" name="total">
+        </div>
+
+        <div>
+            <label for="tunai">Tunai</label>
+        </div>
+        <div>
+            <input type="text" id="tunai" name="tunai">
+        </div>
+
+        <div>
+            <label for="kembalian">Kembalian</label>
+        </div> 
+        <div>
+            <input type="text" id="kembalian" name="kembalian">
+        </div>
+
+        <div style="padding-top: 10px;">
+            <button id="btn-save-transaksi" style="padding-top: 5px; ">Simpan</button>
+        </div>
+        
+    </form>
+
+    <div id="daftar-produk">
+    </div>
+    
+    <script src="javascript.js"></script>
+</body>
+</html>
