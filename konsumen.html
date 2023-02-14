@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Halaman Konsumen</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+	  	<div class="container-fluid">
+		    <ul class="nav navbar-nav">
+		      <li class="active"><a href="AplikasiDaftarProduk.html">Daftar Produk</a></li>
+		      <li><a href="daftarKategori.html">Kategori Produk</a></li>
+		      <li><a href="TransaksiPenjualan.html">Transaksi Penjualan</a></li>
+		      <li><a href="Konsumen.html">Halaman Konsumen</a></li>
+		    </ul>
+	  	</div>
+	</nav>
+	<p>Konsumen</p>
+
+	<form id="form-konsumen" action="" onsubmit="even.preventDefaukt(); simpanKonsumen(this)">
+
+		<div>
+			<label for="nama">Nama</label>
+		</div>
+		<div>
+			<input type="text" id="nama" name="Nama">
+		</div>
+
+		<div>
+			<label for="alamat">Alamat</label>
+		</div>
+		<div>
+			<input type="text" id="alamat"  name="Alamat">
+		</div>
+
+		<div>
+			<label for="noHP">No HP</label>
+		</div>
+		<div>
+			<input type="text" id="no HP" name="noHP">
+		</div>
+
+		<div>
+			<label for="email">Email</label>
+		</div>
+		<div>
+			<input type="text" id="email" name="Email">
+		</div>
+
+		<div style="padding-top: 10px;">
+			<button id="btn-save-konsumen" style="padding-top: 5px;">Simpan</button>
+		</div>
+
+		<div id="daftar-konsumen"></div>
+	</form>
+<script type="text/javascript" src="konsumen.js"></script>
+</body>
+</html>
