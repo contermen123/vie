@@ -1,60 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Halaman Konsumen</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.50.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Halaman Konsumen</title>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-	  	<div class="container-fluid">
-		    <ul class="nav navbar-nav">
-		      <li class="active"><a href="AplikasiDaftarProduk.html">Daftar Produk</a></li>
-		      <li><a href="daftarKategori.html">Kategori Produk</a></li>
-		      <li><a href="TransaksiPenjualan.html">Transaksi Penjualan</a></li>
-		      <li><a href="Konsumen.html">Halaman Konsumen</a></li>
-		    </ul>
-	  	</div>
-	</nav>
-	<p>Konsumen</p>
+    <div class="container mx-auto"></div>
+    <div class="flex justify-center gap-5">
+    <nav class="navbar navbar-default">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Daftar Produk</a></li>
+            <li><a href="kategori.html">Kategori Produk</a></li>
+            <li><a href="penjualan.html">Transaksi Penjualan</a></li>
+            <li><a href="konsumen.html">Konsumen</a></li>
+          </ul>
+        </div>
+        </nav>
+        <div class="container mx-auto">
+            <div class="flax justify-center gap-5">
+                <div class="card w-96 bg-base-100 shadow-x1">
+		    	<div class="container-fluid"> 
+		        <h1>Konsumen</h1>
+		        <form id="form-konsumen" action="" onsubmit="event.preventDefault(); tambahKonsumen(this)">
+		            <input name="index" type="hidden" value="-1">
+		            <div>
+		                <label for="nama" class="label">Nama</label>
+		            </div>
+		            <div>
+		                <input type="text" id="nama" name="nama" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Nama">
+		            </div>
+		            <div>
+		                <label for="alamat" class="label">Alamat</label>
+		            </div>
+		            <div>
+		                <input type="text" id="alamat" name="alamat" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Alamat">
+		            </div>
+		            <div>
+		                <label for="no" class="label">No HP</label>
+		            </div>
+		            <div>
+		                <input type="text" id="no" name="no" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="No HP">
+		            </div>
+		            <div>
+		                <label for="email" class="label">Email</label>
+		            </div>
+		            <div>
+		                <input type="text" id="email" name="email" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Email">
+		            </div>
+		            <div style="padding-top: 10px;">
+		                <button id="btn-save-konsumen" class="btn btn-primary">Simpan</button>
+		                <div class="card w-96 bg-base-100 shadow-x1"></div>
+                        <div class="card-body">
+                            <p>
+                            	<ul id="daftar-produk" class="menu"></ul>
+                            </p>
+                		</div>
+                </form>            
+                </div>        
+		       	</div>
+		    </div>
+		</div>
+		    <h2 id="history"></h2>
+		    <div id="daftar-konsumen"></div>
+        <script>
+        function tambahKonsumen(form) {  
+            console.log(form);
+            aplikasiHalamanKonsumen.inputKonsumen(form);
+            aplikasiHalamanKonsumen.menampilkanHalamanKonsumen();
+        }
 
-	<form id="form-konsumen" action="" onsubmit="even.preventDefaukt(); simpanKonsumen(this)">
+        const aplikasiHalamanKonsumen = {
+            konsumen: {
+                index: -1,
+                nama: null,
+                alamat: null,
+                no: null,
+                email: null
+            },
+        daftarKonsumen: [],
+        inputKonsumen: function (form) {
+            this.konsumen.index = form.index.value;
+            this.konsumen.nama = form.nama.value;
+            this.konsumen.alamat = form.alamat.value;
+            this.konsumen.no = form.no.value;
+            this.konsumen.email = form.email.value;
+            
+            if(!this.konsumen.nama) {
+                alert('Nama tidak boleh kosong!');
+                return false;
+            }
+            if(!this.konsumen.alamat) {
+                alert('Alamat tidak boleh kosong!');
+                return false;
+            }
+            if(!this.konsumen.no) {
+                alert('No HP tidak boleh kosong!');
+                return false;
+            }
+            if(!this.konsumen.email) {
+                alert('Email tidak boleh kosong!');
+                return false;
+            }
+            if(this.konsumen.index == -1) {
+                this.daftarKonsumen.push(copy(this.konsumen));
+            } else {
+                this.daftarKonsumen[this.konsumen.index] = copy(this.konsumen)
+            }
+            this.resetFormKonsumen(form);
+        },
+        resetFormKonsumen: function (form) {
+            this.konsumen.nama = null;
+            this.konsumen.alamat = null;
+            this.konsumen.no = null;
+            this.konsumen.email = null;
+            this.konsumen.index = -1;
 
-		<div>
-			<label for="nama">Nama</label>
-		</div>
-		<div>
-			<input type="text" id="nama" name="Nama">
-		</div>
+            form.nama.value = this.konsumen.nama;
+            form.alamat.value = this.konsumen.alamat;
+            form.no.value = this.konsumen.no;
+            form.email.value = this.konsumen.email;
+            form.index.value = this.konsumen.index;
 
-		<div>
-			<label for="alamat">Alamat</label>
-		</div>
-		<div>
-			<input type="text" id="alamat"  name="Alamat">
-		</div>
+            document.getElementById('btn-save-konsumen').innerHTML = 'Tambah';
+        },
+        menampilkanHalamanKonsumen: function () {
+            const componentHalamanKonsumen = document.getElementById('daftar-konsumen');
+            componentHalamanKonsumen.innerHTML = '';
+            this.daftarKonsumen.forEach((konsumen, index) => {
+                componentHalamanKonsumen.innerHTML += `${konsumen.nama} <br> ${konsumen.alamat} <br> ${konsumen.no} <br> ${konsumen.email} <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.editKonsumen(${index})">Edit</button> <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.hapusKonsumen(${index})">Hapus</button>`;
+            });
+        },
+        hapusKonsumen: function (index) {
+            if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
+                this.daftarKonsumen.splice(index, 1);
+                this.menampilkanHalamanKonsumen();
+            }
+        },
+            editKonsumen: function (index) {
+            const konsumen = this.daftarKonsumen[index];
+            const form = document.getElementById('form-konsumen');
+                form.nama.value = konsumen.nama;
+                form.alamat.value = konsumen.alamat;
+                form.no.value = konsumen.no;
+                form.email.value = konsumen.email;
+                form.index.value = index;
 
-		<div>
-			<label for="noHP">No HP</label>
-		</div>
-		<div>
-			<input type="text" id="no HP" name="noHP">
-		</div>
-
-		<div>
-			<label for="email">Email</label>
-		</div>
-		<div>
-			<input type="text" id="email" name="Email">
-		</div>
-
-		<div style="padding-top: 10px;">
-			<button id="btn-save-konsumen" style="padding-top: 5px;">Simpan</button>
-		</div>
-
-		<div id="daftar-konsumen"></div>
-	</form>
-<script type="text/javascript" src="konsumen.js"></script>
+             document.getElementById('btn-save-konsumen').innerHTML = 'Edit';
+            }
+        }
+        function copy(obj) {
+        return JSON.parse(JSON.stringify(obj));
+        } 
+    </script>
 </body>
 </html>

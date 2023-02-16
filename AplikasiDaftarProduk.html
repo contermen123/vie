@@ -1,53 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"data-theme="bumblebee">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Produk</title>
-    <style>
-        
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.50.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Aplikasi Daftar Produk</title>
 </head>
 <body>
-    <h1>Daftar Produk</h1>
-    
-        <form id="form-produk" action="" onsubmit="event.preventDefault(); simpanProduk(this)">
-            <input name="index" type="hidden" value="-1">
-
-        <div>
-            <label for="produk">Nama Produk</label>
+    <div class="container mx-auto"></div>
+    <div class="flex justify-center gap-5">
+    <nav class="navbar navbar-default">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">Daftar Produk</a></li>
+            <li><a href="kategori.html">Kategori Produk</a></li>
+            <li><a href="penjualan.html">Transaksi Penjualan</a></li>
+            <li><a href="konsumen.html">Konsumen</a></li>
+          </ul>
         </div>
-        <div>
-            <input type="text" id="produk" name="produk">
-        </div>
-        <div>
-            <label for="harga">Harga Produk</label>
-        </div>
-        <div>
-            <input type="text" id="harga" name="harga">
-        </div>
-        <div>
-            <label for="stok">Stok Produk</label>
-        </div>
-        <div>
-            <input type="text" id="stok" name="stok">
-        </div>
-        <div>
-            <label for="gambar">Link</label>
-        </div>  
-        <div>
-            <input type="text" id="gambar" name="gambar">
-        </div>
-        <div style="padding-top: 10px;">
-            <button id="btn-save-produk" style="padding-top: 10px; ">Simpan</button>
-        </div>
+        </nav>
         
-    </form>
-
-    <div id="daftar-produk">
+        
+        <div class="container mx-auto">
+            <div class="flax justify-center gap-5">
+                <div class="card w-96 bg-base-100 shadow-x1">
+                    <form id="form-produk" action="" onsubmit="event.preventDefault(); tambahProduk(this)">
+                        <div class="card-body">
+                            <h1>Daftar Produk</h1>
+                            <p>
+                                <input name="index" type="hidden" value="-1">
+                                <div>
+                                    <label for="nama" class="label">Nama Produk</label>
+                                </div>
+                                <div>
+                                    <input type="text" id="nama" name="nama" class="input input-bordered input-primary file-input-sm  w-full max-w-xs" placeholder="Nama">
+                                </div>
+                                <div>
+                                    <label for="harga" class="label">Harga Produk</label>
+                                </div>
+                                <div>
+                                    <input type="text" id="harga" name="harga" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Harga">
+                                </div>
+                                <div>
+                                    <label for="stok" class="label">Stok Produk</label>
+                                </div>
+                                <div>
+                                    <input type="text" id="stok" name="stok" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Stok">
+                                </div>
+                                <div>
+                                    <label for="gambar" class="label">Link Gambar Produk</label>
+                                </div>
+                                <div>
+                                    <input type="text" id="gambar" name="gambar" class="input input-bordered input-primary file-input-sm w-full max-w-xs" placeholder="Link">
+                                </div>
+                            </p>
+                            <div style="padding-top: 10px;">
+                                <button id="btn-save-produk" class="btn btn-primary">Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card w-96 bg-base-100 shadow-x1"></div>
+                    <div class="card-body">
+                        <p>
+                            <ul id="daftar-produk" class="menu"></ul>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     
+
     <script src="javascript.js"></script>
 </body>
 </html>

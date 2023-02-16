@@ -1,12 +1,13 @@
-function simpanProduk(form) {
+function tambahProduk(form) {
     console.log(form);
     aplikasiDaftarProduk.inputProduk(form);
     aplikasiDaftarProduk.menampilkanDaftarProduk();
 }
+
 const aplikasiDaftarProduk = {
-    produk: 
+    produk: {
         index: -1,
-        produk: null,
+        nama: null,
         harga: null,
         stok: null,
         gambar: null
@@ -14,62 +15,73 @@ const aplikasiDaftarProduk = {
     daftarProduk: [],
     inputProduk: function (form) {
         this.produk.index = form.index.value;
-        this.produk.produk = form.produk.value;
+        this.produk.nama = form.nama.value;
         this.produk.harga = form.harga.value;
         this.produk.stok = form.stok.value;
         this.produk.gambar = form.gambar.value;
 
-        if(!this.produk.produk) {
-            alert('produk tidak boleh kosong');
-            return false
+        if(!this.produk.nama) {
+            alert('Nama tidak boleh kosong!');
+            return false;
         }
+
         if(!this.produk.harga) {
-            alert('harga tidak boleh kosong');
-            return false
+            alert('Harga tidak boleh kosong!');
+            return false;
         }
+
         if(!this.produk.stok) {
-            alert('stok tidak boleh kosong');
-            return false
+            alert('Stok tidak boleh kosong!');
+            return false;
         }
+
         if(!this.produk.gambar) {
-            alert('link gambar tidak boleh kosong');
-            return false
+            alert('Gambar tidak boleh kosong!');
+            return false;
         }
-        
+
         if(this.produk.index == -1) {
             this.daftarProduk.push(copy(this.produk));
         } else {
             this.daftarProduk[this.produk.index] = copy(this.produk)
         }
-        this.resetFormTugas(form);
+
+        this.resetFormProduk(form);
     },
-    
-    resetFormTugas: function(form) {
-        this.produk.produk =null;
+    resetFormProduk: function (form) {
+        this.produk.nama = null;
         this.produk.harga = null;
         this.produk.stok = null;
         this.produk.gambar = null;
         this.produk.index = -1;
 
-        form.produk.value = this.produk.produk;
+        form.nama.value = this.produk.nama;
         form.harga.value = this.produk.harga;
         form.stok.value = this.produk.stok;
         form.gambar.value = this.produk.gambar;
         form.index.value = this.produk.index;
 
-        document.getElementById('btn-save-produk').innerHTML = 'Simpan';
+        document.getElementById('btn-save-produk').innerHTML = 'Tambah';
     },
     menampilkanDaftarProduk: function () {
         const componentDaftarProduk = document.getElementById('daftar-produk');
         componentDaftarProduk.innerHTML = '';
         this.daftarProduk.forEach((produk, index) => {
-            componentDaftarProduk.innerHTML +=  `<h4>${produk.produk} <br> ${produk.harga} <br> stok: ${produk.stok} <br> <img src="${produk.gambar}"width ="100 px" ><button 
-            onclick="aplikasiDaftarProduk.editProduk(${index})">Edit</button><button 
-            onclick="aplikasiDaftarProduk.hapusProduk(${index})"> Hapus </button></h4>`;
+            componentDaftarProduk.innerHTML += `
+                <div>
+                    ${produk.nama} <br>
+                    ${produk.harga} <br>  
+                    ${produk.stok} <br> 
+                    <img src="${produk.gambar}" width="200" height="200";>
+                </div>
+                <div> 
+                    <button class="btn btn-xs mr-2" ocnclick"aplikasiDaftarProduk.editProduk(${index})">Edit</button> 
+                    <button class="btn btn-xs btn-error" onclick="aplikasiDaftarProduk.hapusProduk(${index})">Hapus</button>
+                </div>`;
         });
     },
     hapusProduk: function (index) {
-        if(confirm('Apakah anda yakin ingin menghaapus data ini?')) {
+        if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
             this.daftarProduk.splice(index, 1);
             this.menampilkanDaftarProduk();
         }
@@ -77,16 +89,16 @@ const aplikasiDaftarProduk = {
     editProduk: function (index) {
         const produk = this.daftarProduk[index];
         const form = document.getElementById('form-produk');
-        form.produk.value = produk.produk;
+        form.nama.value = produk.nama;
         form.harga.value = produk.harga;
         form.stok.value = produk.stok;
         form.gambar.value = produk.gambar;
         form.index.value = index;
 
-
         document.getElementById('btn-save-produk').innerHTML = 'Edit';
     }
-
+}
+ 
 function copy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
