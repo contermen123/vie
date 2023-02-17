@@ -11,11 +11,11 @@
 <body>
     <div class="container mx-auto"></div>
     <div class="flex justify-center gap-5">
-    <nav class="navbar navbar-default">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">Daftar Produk</a></li>
-            <li><a href="kategori.html">Kategori Produk</a></li>
-            <li><a href="penjualan.html">Transaksi Penjualan</a></li>
+    <nav class="navbar">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="AplikasiDaftarProduk.html">Daftar Produk</a></li>
+            <li><a href="daftarKategori.html">Kategori Produk</a></li>
+            <li><a href="TransaksiPenjualan.html">Transaksi Penjualan</a></li>
             <li><a href="konsumen.html">Konsumen</a></li>
           </ul>
         </div>
@@ -94,11 +94,19 @@
     <script>
         function tambahTransaksi(form) {
             console.log(form);
-            aplikasiTransaksiPenjualan.inputTransaksi(form);
-            aplikasiTransaksiPenjualan.menampilkanTransaksiPenjualan();
+            TransaksiPenjualan.inputTransaksi(form);
+            TransaksiPenjualan.menampilkanTransaksiPenjualan();
+        }
+        const databaseDaftarTransaksi = {
+            save (daftarTransaksi) {
+                localStorage.setItem('daftarTransaksi', JSON.stringify(daftarTransaksi));
+            },
+            get() {
+                return JSON.parse(localStorage.getItem('daftarTransaksi'));
+            }
         }
 
-        const aplikasiTransaksiPenjualan = {
+        const TransaksiPenjualan = {
             transaksi: {
                 index: -1,
                 nama: null,
@@ -155,10 +163,12 @@
                     return false;
                 }
                 if(this.transaksi.index == -1) {
+                    this.daftarTransaksi = this.daftarTransaksi || [];
                     this.daftarTransaksi.push(copy(this.transaksi));
                 } else {
                     this.daftarTransaksi[this.transaksi.index] = copy(this.transaksi)
                 }
+                databaseDaftarTransaksi.save(this.daftarTransaksi);
                 this.resetFormTransaksi(form);
             },
             resetFormTransaksi: function (form) {
@@ -183,16 +193,25 @@
                 form.index.value = this.transaksi.index;
             },
             menampilkanTransaksiPenjualan: function () {
+                this.daftarTransaksi = databaseDaftarTransaksi.get();
                 const componentTransaksiPenjualan = document.getElementById('daftar-transaksi');
                 componentTransaksiPenjualan.innerHTML = '';
-                this.daftarTransaksi.forEach((transaksi, index) => {
+
+                if(daftarTransaksi === null) {
+                    console.log('tidak ada transaksi')
+                } else {
+                    this.daftarTransaksi.forEach((transaksi, index) => {
                     componentTransaksiPenjualan.innerHTML += `${transaksi.nama} <br> ${transaksi.harga} <br>  ${transaksi.stok} <br> ${transaksi.jumlah} <br> ${transaksi.total} <br> ${transaksi.tunai} <br> ${transaksi.kembali} <br> <img src="${transaksi.gambar}" width="200" height="200";>`;
                 });
+
+                }
+                
             },
         }
     function copy(obj) {
     return JSON.parse(JSON.stringify(obj));
 }
+TransaksiPenjualan.menampilkanTransaksiPenjualan();
     </script>
 </body>
 </html>

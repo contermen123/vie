@@ -11,11 +11,11 @@
 <body>
     <div class="container mx-auto"></div>
     <div class="flex justify-center gap-5">
-    <nav class="navbar navbar-default">
-          <ul class="nav navbar-nav">
-            <li><a href="index.html">Daftar Produk</a></li>
-            <li><a href="kategori.html">Kategori Produk</a></li>
-            <li><a href="penjualan.html">Transaksi Penjualan</a></li>
+    <nav class="navbar">
+          <ul class="menu menu-horizontal px-1">
+            <li><a href="aplikasiDaftarProduk.html">Daftar Produk</a></li>
+            <li><a href="daftarKategori.html">Kategori Produk</a></li>
+            <li><a href="TransaksiPenjualan.html">Transaksi Penjualan</a></li>
             <li><a href="konsumen.html">Konsumen</a></li>
           </ul>
         </div>
@@ -69,11 +69,19 @@
         <script>
         function tambahKonsumen(form) {  
             console.log(form);
-            aplikasiHalamanKonsumen.inputKonsumen(form);
-            aplikasiHalamanKonsumen.menampilkanHalamanKonsumen();
+            HalamanKonsumen.inputKonsumen(form);
+            HalamanKonsumen.menampilkanHalamanKonsumen();
+        }
+        const databaseHalamanKonsumen = {
+        	save(daftarKonsumen) {
+        		localStorage.setItem('daftarKonsumen', JSON.stringify(daftarKonsumen));
+        	},
+        	get() {
+        		return JSON.parse(localStorage.getItem('daftarKonsumen'));
+        	}
         }
 
-        const aplikasiHalamanKonsumen = {
+        const HalamanKonsumen = {
             konsumen: {
                 index: -1,
                 nama: null,
@@ -106,10 +114,12 @@
                 return false;
             }
             if(this.konsumen.index == -1) {
+            	this.daftarKonsumen = this.daftarKonsumen || [];
                 this.daftarKonsumen.push(copy(this.konsumen));
             } else {
                 this.daftarKonsumen[this.konsumen.index] = copy(this.konsumen)
             }
+            databaseHalamanKonsumen.save(this.daftarKonsumen);
             this.resetFormKonsumen(form);
         },
         resetFormKonsumen: function (form) {
@@ -128,15 +138,24 @@
             document.getElementById('btn-save-konsumen').innerHTML = 'Tambah';
         },
         menampilkanHalamanKonsumen: function () {
+        	this.daftarKonsumen = databaseHalamanKonsumen.get();
             const componentHalamanKonsumen = document.getElementById('daftar-konsumen');
             componentHalamanKonsumen.innerHTML = '';
-            this.daftarKonsumen.forEach((konsumen, index) => {
+
+            if(daftarKonsumen === null) {
+            	console.log('konsumen tidak ada')
+            } else {
+            	this.daftarKonsumen.forEach((konsumen, index) => {
                 componentHalamanKonsumen.innerHTML += `${konsumen.nama} <br> ${konsumen.alamat} <br> ${konsumen.no} <br> ${konsumen.email} <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.editKonsumen(${index})">Edit</button> <button class="btn btn-xs mr-2" onclick="aplikasiHalamanKonsumen.hapusKonsumen(${index})">Hapus</button>`;
             });
+
+            }
+            
         },
         hapusKonsumen: function (index) {
             if(confirm('Apakah anda yakin ingin menghapus data ini ?')) {
                 this.daftarKonsumen.splice(index, 1);
+                databaseHalamanKonsumen.save(this.daftarKonsumen);
                 this.menampilkanHalamanKonsumen();
             }
         },
@@ -155,6 +174,7 @@
         function copy(obj) {
         return JSON.parse(JSON.stringify(obj));
         } 
+        HalamanKonsumen.menampilkanHalamanKonsumen();
     </script>
 </body>
 </html>
